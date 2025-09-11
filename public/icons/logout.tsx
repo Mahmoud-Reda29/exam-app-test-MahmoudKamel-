@@ -1,0 +1,9 @@
+import { Icons } from "@lib/types/icons/icons";
+
+export default function LogoutIcon({size = 18, className} : Readonly<Icons>) {
+       return (
+       <svg className={className} width={size} height={size} viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M6 12.75L2.25 9M2.25 9L6 5.25M2.25 9H11.25M11.25 15.75H14.25C14.6478 15.75 15.0294 15.592 15.3107 15.3107C15.592 15.0294 15.75 14.6478 15.75 14.25V3.75C15.75 3.35218 15.592 2.97064 15.3107 2.68934C15.0294 2.40804 14.6478 2.25 14.25 2.25H11.25" stroke="#F87171" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
+       </svg>
+       );
+}
