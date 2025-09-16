@@ -4,15 +4,15 @@ import ArrowBackLeftIcon from "@public/icons/arrow-back-left";
 import { useRouter } from "next/navigation";
 
 export default function ButtonBack() {
-       const router = useRouter();
+  const router = useRouter();
 
-       return (
-              <button
-                     className={cn("h-auto px-1 border border-solid border-blue-600")}
-                     role="link"
-                     onClick={() => router.back()}
-              >
-                     <ArrowBackLeftIcon />
-              </button>
-       );
+  return (
+    <button
+      className={cn("h-auto px-1 border border-solid border-blue-600")}
+      role="link"
+      onClick={() => router.back()}
+    >
+      <ArrowBackLeftIcon />
+    </button>
+  );
 }

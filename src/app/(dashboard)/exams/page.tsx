@@ -4,16 +4,11 @@ import BookOpenCheckIcon from "@public/icons/book-open-check";
 import React from "react";
 
 export default function ExamsPage() {
+  return (
+    <>
+      <HeaderPage title="Exams" icon={<BookOpenCheckIcon color="white" />} showButtonBack={true} />
 
-       return (
-       <>
-              <HeaderPage 
-                     title="Exams"
-                     icon={<BookOpenCheckIcon color="white" />}
-                     showButtonBack={true}
-              />
-
-              <ExamsItems />
-       </>
-       );
+      <ExamsItems />
+    </>
+  );
 }

@@ -2,25 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
-
 /*-- global styles
 ------------------------*/
-a, span, img {
-       display: inline-block;
+a,
+span,
+img {
+  display: inline-block;
 }
 
 img {
-       user-select: none;
-       vertical-align: initial !important;
+  user-select: none;
+  vertical-align: initial !important;
 }
 
 input[type="password"]::-ms-reveal,
 input[type="password"]::-ms-clear {
-    display: none;
+  display: none;
 }
 
 form.user div {
-       width: 100%; /*? for handle style driver */
+  width: 100%; /*? for handle style driver */
 }
 
 /*---break---*/

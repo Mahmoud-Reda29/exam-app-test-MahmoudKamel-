@@ -3,14 +3,14 @@ import { ReactNode } from "react";
 import { cn } from "@lib/utils/cn.utils";
 
 export default function Layout({
-       children,
+  children,
 }: Readonly<{
-       children:ReactNode;
+  children: ReactNode;
 }>) {
-       return (
-       <section className={cn("flex content-stretch min-h-screen")}>
-              <PanelCover />
-              {children}
-       </section>
-       );
-};
+  return (
+    <section className={cn("flex content-stretch min-h-screen")}>
+      <PanelCover />
+      {children}
+    </section>
+  );
+}

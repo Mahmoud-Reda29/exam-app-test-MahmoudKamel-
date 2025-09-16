@@ -4,20 +4,18 @@ import Header from "@components/features/dashboard/header";
 import Providers from "@components/providers";
 
 export default function Layout({
-       children,
+  children,
 }: Readonly<{
-       children: React.ReactNode;
+  children: React.ReactNode;
 }>) {
-       return (
-              <div className="flex">
-                     <AsidebarRoot />
+  return (
+    <div className="flex">
+      <AsidebarRoot />
 
-                     <Container id="scroll-react-infinity" className="bg-gray-50">
-                            <Header />
-                            <Providers>
-                            {children}
-                            </Providers>
-                     </Container>
-              </div>
-       );
+      <Container id="scroll-react-infinity" className="bg-gray-50">
+        <Header />
+        <Providers>{children}</Providers>
+      </Container>
+    </div>
+  );
 }
