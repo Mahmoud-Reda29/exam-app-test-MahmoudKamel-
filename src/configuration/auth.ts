@@ -1,10 +1,6 @@
 import { postLogin } from "@lib/api/authentication";
-import { NextAuthOptions, User } from "next-auth";
+import { NextAuthOptions } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-
-interface CustomUser extends User {
-  accessToken: string;
-}
 
 export const authOptions: NextAuthOptions = {
   // Configure one or more authentication pages
@@ -35,9 +31,9 @@ export const authOptions: NextAuthOptions = {
 
           return {
             id: user._id,
-            email: user.email,
-            name: `${user.firstName} ${user.lastName}`,
-          } as User;
+            token: response.token,
+            user: user,
+          };
         }
 
         // Return error if user data could not be retrieved
@@ -49,14 +45,14 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        token.user = user;
-        token.accessToken = (user as CustomUser).accessToken;
+        token.token = user.token;
+        token.user = user.user;
       }
 
       return token;
     },
     async session({ session, token }) {
-      if (session.user) session.user = token.user as User;
+      session.user = token.user;
 
       return session;
     },

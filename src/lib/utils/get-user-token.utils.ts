@@ -1,10 +1,21 @@
-import { getUserToken } from "@lib/api/authentication";
-// import { JWT } from "next-auth/jwt";
+import { decode } from "next-auth/jwt";
+import { cookies } from "next/headers";
 
-export async function extractUserToken() {
-  return await getUserToken();
-}
+export async function getUserToken() {
+  const token = cookies().get("next-auth.session-token")?.value;
 
-export async function resolveUserToken() {
-  //
+  if (!token) return null;
+
+  try {
+    const jwt = await decode({
+      token,
+      secret: process.env.NEXTAUTH_SECRET!,
+    });
+
+    return jwt;
+  } catch (error) {
+    void error;
+
+    return null;
+  }
 }

@@ -1,7 +1,6 @@
 "use client";
 import Loading from "@app/(dashboard)/loading";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { getAllSubjects } from "@lib/api/subjects/getAllSubjects";
 import { cn } from "@lib/utils/cn.utils";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import Image from "next/image";
@@ -13,12 +12,18 @@ export default function Diplomas() {
   const { data, error, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage } =
     useInfiniteQuery<GetAllSubjects>({
       queryKey: ["subjects"],
-      queryFn: async ({ pageParam = 2 }) => getAllSubjects(pageParam as number),
+      queryFn: async ({ pageParam = 1 }) => {
+        const res = await fetch(`/api/subjects?limit=6&page=${pageParam}`);
+        if (!res.ok) {
+          throw new Error("Failed to fetch subjects");
+        }
+        return res.json() as Promise<GetAllSubjects>;
+      },
       getNextPageParam: (lastPage) => {
         const { currentPage, numberOfPages } = lastPage.metadata;
         return currentPage < numberOfPages ? currentPage + 1 : undefined;
       },
-      initialPageParam: 2,
+      initialPageParam: 1, // start with page 1
     });
 
   // when loading data
@@ -42,7 +47,7 @@ export default function Diplomas() {
         hasMore={!!hasNextPage}
         className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2"
         scrollThreshold={0.9}
-        // loader={<h4>Loading...</h4>}
+        loader={<h4>Loading...</h4>}
         scrollableTarget="scroll-react-infinity"
         pullDownToRefreshContent={<p>Scroll to view more</p>}
       >

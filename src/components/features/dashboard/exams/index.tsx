@@ -22,8 +22,6 @@ export default function ExamsItems() {
     queryFn: getAllExams,
   });
 
-  console.log(data);
-
   // when loading data
   if (isLoading) return <Loading />;
 

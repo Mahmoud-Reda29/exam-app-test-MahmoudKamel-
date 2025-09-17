@@ -21,7 +21,7 @@ export default function ChangePasswordForm() {
       className={cn("h-full w-full p-6 flex flex-col items-start justify-center")}
       // onSubmit={handleSubmit(onSubmitRegister)}
     >
-      {/* current-password filed */}
+      {/* Current Password field */}
       <div
         className={cn(
           "current-password | w-full mb-4 flex flex-col flex-auto gap-2 text-gray-800 font-medium"
@@ -39,7 +39,7 @@ export default function ChangePasswordForm() {
         )}
       </div>
 
-      {/* new-password filed */}
+      {/* New Password field */}
       <div
         className={cn(
           "new-password | w-full mb-4 flex flex-col flex-auto gap-2 text-gray-800 font-medium"
@@ -57,13 +57,13 @@ export default function ChangePasswordForm() {
         )}
       </div>
 
-      {/* confirm-new-password filed */}
+      {/* Confirm New Password field */}
       <div
         className={cn(
           "confirm-new-password | w-full mb-8 flex flex-col flex-auto gap-2 text-gray-800 font-medium"
         )}
       >
-        <Label htmlFor="confirm-new-password">New Password</Label>
+        <Label htmlFor="confirm-new-password">Confirm New Password</Label>
         <InputPassword
           className="h-12 border-gray-200 placeholder:text-gray-400 focus:border-blue-600 transition-border duration-200"
           id="confirm-new-password"

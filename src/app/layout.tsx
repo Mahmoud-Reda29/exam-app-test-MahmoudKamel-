@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ReactNode } from "react";
 import { geistMono, inter } from "@fonts";
+import Providers from "@components/providers";
 
 export const metadata: Metadata = {
   title: "Exam App",
@@ -15,7 +16,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={` ${geistMono.className} ${inter.variable} antialiased`}>{children}</body>
+      <body className={` ${geistMono.className} ${inter.variable} antialiased`}>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }

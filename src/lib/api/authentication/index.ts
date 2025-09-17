@@ -7,11 +7,9 @@ import {
   LoginData,
   NewPasswordData,
   NewPasswordResponse,
-  SignupData,
   VerifyResetCodeData,
   VerifyResetCodeResponse,
 } from "@lib/types/api/authentication";
-import { JWT } from "next-auth/jwt";
 
 /**
  * Authenticates user with email and password
@@ -21,27 +19,7 @@ import { JWT } from "next-auth/jwt";
  */
 export async function postLogin(data: LoginData): Promise<AuthResponse> {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/signin`, {
-      method: "POST",
-      headers: DEFAULT_API_HEADERS,
-      body: JSON.stringify(data),
-    });
-
-    return response.json();
-  } catch (error) {
-    throw new Error(`is error ${error}`);
-  }
-}
-
-/**
- * Registers a new user account
- * @param data - User signup data (email, password, firstName, lastName, etc.)
- * @returns Promise with signup response data
- * @throws Error if request fails or network error occurs
- */
-export async function postSignup(data: SignupData): Promise<AuthResponse> {
-  try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/signup`, {
+    const response = await fetch(`${process.env.API}/auth/signin`, {
       method: "POST",
       headers: DEFAULT_API_HEADERS,
       body: JSON.stringify(data),
@@ -88,24 +66,30 @@ export async function postVerifyResetCode(
 export async function putNewPassword(data: NewPasswordData): Promise<NewPasswordResponse> {
   try {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/resetPassword`, {
-      method: "POST",
+      method: "PUT",
       headers: DEFAULT_API_HEADERS,
       body: JSON.stringify(data),
     });
 
-    return response.json();
+    const payload = await response.json();
+
+    if ("code" in payload) {
+      throw new Error(payload.message);
+    }
+
+    return payload;
   } catch (error) {
     throw new Error(`is error ${error}`);
   }
 }
 
-export async function getUserToken(): Promise<JWT> {
-  try {
-    const response = await fetch(`http://localhost:3000/api/auth/token`);
-    const data = await response.json();
-    return response.json();
-  } catch (error) {
-    throw new Error(`is error ${error}`);
-  }
-}
-getUserToken();
+// export async function getUserToken(): Promise<JWT> {
+//   try {
+//     const response = await fetch(`http://localhost:3000/api/auth/token`);
+//     const data = await response.json();
+//     return response.json();
+//   } catch (error) {
+//     throw new Error(`is error ${error}`);
+//   }
+// }
+// getUserToken();

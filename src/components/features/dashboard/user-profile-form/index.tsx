@@ -54,7 +54,7 @@ export default function UserProfileForm() {
             )}
           </div>
 
-          {/* lastName filed */}
+          {/* lastName field */}
           <div
             className={cn(
               "lastName | w-full mb-4 flex flex-col flex-auto gap-2 text-gray-800 font-medium"
@@ -81,7 +81,7 @@ export default function UserProfileForm() {
           </div>
         </div>
 
-        {/* username filed */}
+        {/* username field */}
         <div className={cn("username | w-full mb-4 flex flex-col gap-2 text-gray-800 font-medium")}>
           <StepComponent
             key={2}
@@ -103,7 +103,7 @@ export default function UserProfileForm() {
           )}
         </div>
 
-        {/* email filed */}
+        {/* email field */}
         <div className={cn("email | w-full mb-4 flex flex-col gap-2 text-gray-800 font-medium")}>
           <StepComponent
             key={3}
@@ -123,7 +123,7 @@ export default function UserProfileForm() {
           {errors.email && <p className="invalid | text-sm text-red-600">{errors.email.message}</p>}
         </div>
 
-        {/* phone filed */}
+        {/* phone field */}
         <div className={cn("phone | w-full mb-8 flex flex-col gap-2 text-gray-800 font-medium")}>
           <StepComponent
             key={5}

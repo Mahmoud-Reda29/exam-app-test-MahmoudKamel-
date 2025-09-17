@@ -6,8 +6,10 @@ import React from "react";
 export default function ExamsPage() {
   return (
     <>
+      {/* Header */}
       <HeaderPage title="Exams" icon={<BookOpenCheckIcon color="white" />} showButtonBack={true} />
 
+      {/* Exams List */}
       <ExamsItems />
     </>
   );

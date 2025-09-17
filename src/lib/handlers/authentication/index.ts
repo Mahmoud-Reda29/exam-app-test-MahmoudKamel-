@@ -1,49 +1,9 @@
 import { FormInput } from "@lib/types/forms/form";
 import { SubmitHandler } from "react-hook-form";
-import { getSession, signIn } from "next-auth/react";
-import {
-  postForgotPassword,
-  postSignup,
-  postVerifyResetCode,
-  putNewPassword,
-} from "@lib/api/authentication";
-import {
-  ForgotPasswordSchema,
-  LoginSchema,
-  NewPasswordSchema,
-  RegisterSchema,
-  VerifyOTPSchema,
-} from "@schema/authentication";
+import { postForgotPassword, postVerifyResetCode, putNewPassword } from "@lib/api/authentication";
+import { ForgotPasswordSchema, NewPasswordSchema, VerifyOTPSchema } from "@schema/authentication";
 
 let messageError: string = "";
-
-export const onSubmitLogin: SubmitHandler<FormInput<typeof LoginSchema>> = async (data) => {
-  // response from next-auth signIn function
-  const response = await signIn("credentials", {
-    email: data.email,
-    password: data.password,
-    redirect: false,
-    // callbackUrl: "/"
-  });
-
-  // If there is an error, set the messageError variable to the error message
-  if (response?.error) {
-    messageError = response.error;
-    return;
-  }
-
-  // If the response is ok, redirect to the home page
-  if (response?.ok) {
-    const session = await getSession();
-    if (session) location.href = "/";
-  }
-};
-
-export const onSubmitRegister: SubmitHandler<FormInput<typeof RegisterSchema>> = async (data) => {
-  const response = await postSignup(data);
-  // console.log(data);
-  if (response.message === "success") location.href = "/auth/login";
-};
 
 export const onForgotPassword: SubmitHandler<FormInput<typeof ForgotPasswordSchema>> = async (
   data
@@ -69,10 +29,9 @@ export const onNewPassword: SubmitHandler<FormInput<typeof NewPasswordSchema>> =
   delete data.confirmPassword;
   const response = await putNewPassword(data);
   if (response.message !== "success") {
-    messageError = response.message;
-    return false;
+    throw new Error(response.message);
   }
-  if (response.message === "success") return true;
+  if (response.message === "success") window.location.href = "/auth/login";
 };
 
 export const handleNextAuthErrorMessage = (): string => messageError;
